@@ -44,6 +44,7 @@ button:hover {
   margin-top: 17px;
 }
 #userTimeButton,
+#currentColorButton,
 #timeChangeDiv {
   margin-top: 17px;
 }
@@ -77,4 +78,15 @@ a {
   font-weight: 10x;
   font-style: normal;
   padding: 10px;
+}
+#displayCodeHere {
+  background-color: #fff;
+  font-size: medium;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 5px;
+  padding: 5px 10px;
+  font-family: "Optima", monospace;
+  font-optical-sizing: auto;
+  font-weight: 7x;
 }
