@@ -10,6 +10,7 @@ document.querySelector("#colorCode").setAttribute("hidden", "hidden");
 document.querySelector(".apply").setAttribute("hidden", "hidden");
 document.querySelector("#time").setAttribute("hidden", "hidden");
 document.querySelector(".applyTime").setAttribute("hidden", "hidden");
+document.querySelector("#displayCodeHere").setAttribute("hidden", "hidden");
 let intervalId;
 let TIMER = 1000;
 const startChangingColor = function () {
@@ -20,6 +21,10 @@ const startChangingColor = function () {
   document.querySelector(".apply").setAttribute("hidden", "hidden");
   document.querySelector("#time").setAttribute("hidden", "hidden");
   document.querySelector(".applyTime").setAttribute("hidden", "hidden");
+  document.querySelector("#displayCodeHere").setAttribute("hidden", "hidden");
+  document
+    .querySelector("#currentColorButton")
+    .setAttribute("hidden", "hidden");
   if (!intervalId) {
     intervalId = setInterval(changeBg, TIMER);
   }
@@ -32,6 +37,7 @@ const stopChangingColor = function () {
   document.querySelector("#reset").removeAttribute("hidden");
   document.querySelector("#userColorButton").removeAttribute("hidden");
   document.querySelector("#userTimeButton").removeAttribute("hidden");
+  document.querySelector("#currentColorButton").removeAttribute("hidden");
   // document.querySelector("#colorCode").removeAttribute("hidden");
   // document.querySelector(".apply").removeAttribute("hidden");
   clearInterval(intervalId);
@@ -49,11 +55,12 @@ document
 document.querySelector("#reset").addEventListener(
   "click",
   () => {
-    document.body.style.backgroundColor = "white";
+    document.body.style.backgroundColor = "#ffffff";
     document.querySelector("#colorCode").setAttribute("hidden", "hidden");
     document.querySelector(".apply").setAttribute("hidden", "hidden");
     document.querySelector("#time").setAttribute("hidden", "hidden");
     document.querySelector(".applyTime").setAttribute("hidden", "hidden");
+    document.querySelector("#displayCodeHere").setAttribute("hidden", "hidden");
     TIMER = 1000;
     document.querySelector(
       "h1"
@@ -91,6 +98,7 @@ document.querySelector(".apply").addEventListener(
     let colorCode = "#";
     const Code = document.querySelector("#colorCode").value;
     document.querySelector("#colorCode").value = "";
+    document.querySelector("#displayCodeHere").setAttribute("hidden", "hidden");
     if (Code.length === 6) {
       console.log(Code);
       colorCode += Code;
@@ -121,10 +129,33 @@ document.querySelector(".applyTime").addEventListener(
     document.querySelector("#time").value = "";
     if (!(seconds <= 0 || seconds > 100)) {
       // console.log(seconds);
-      document.querySelector(
-        "h1"
-      ).innerHTML = `The Background changes every ${seconds} second when clicked on start`;
-      TIMER = seconds * 1000;
+      if (seconds === 1) {
+        document.querySelector(
+          "h1"
+        ).innerHTML = `The Background changes every ${seconds} second when clicked on start`;
+        TIMER = seconds * 1000;
+      } else {
+        document.querySelector(
+          "h1"
+        ).innerHTML = `The Background changes every ${seconds} seconds when clicked on start`;
+        TIMER = seconds * 1000;
+      }
+    }
+  },
+  false
+);
+
+document.querySelector("#currentColorButton").addEventListener(
+  "click",
+  function () {
+    if (document.querySelector("#displayCodeHere").hasAttribute("hidden")) {
+      document.querySelector("#displayCodeHere").removeAttribute("hidden");
+      document.querySelector("#displayCodeHere").innerHTML =
+        document.body.style.backgroundColor;
+    } else {
+      document
+        .querySelector("#displayCodeHere")
+        .setAttribute("hidden", "hidden");
     }
   },
   false
